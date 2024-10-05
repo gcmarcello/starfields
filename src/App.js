@@ -136,7 +136,7 @@ const App = () => {
       } else {
         clearInterval(interval);
       }
-    }, 15);
+    }, 5);
 
     generateInteractiveStars().forEach(intStar => {
       const intStarElement = document.createElement('div');
