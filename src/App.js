@@ -129,14 +129,14 @@ const App = () => {
 
     let i = 0;
     const interval = setInterval(() => {
-      if (i < 2700) {
+      if (i < 2600) {
         const newStar = generateStar()[0];
         addStar(newStar);
         i++;
       } else {
         clearInterval(interval);
       }
-    }, 6);
+    }, 15);
 
     generateInteractiveStars().forEach(intStar => {
       const intStarElement = document.createElement('div');
