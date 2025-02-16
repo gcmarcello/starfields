@@ -1,4 +1,4 @@
-body {
+  body {
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -6,15 +6,27 @@ body {
     height: 200vh;
     width: 100vw;
   }
-  
+  #sliders{
+    position: absolute;
+    z-index: 1;
+  }
+  #slidersinfo{
+    left: 10vw;
+    position: absolute;
+    width: 30vw;
+    background-color: rgb(59, 83, 97);
+    color: rgb(0, 255, 64);
+    text-align: center;
+  }
   #starfield {
     position: absolute;
     width: 100vw;
     height: 200vh;
     overflow: hidden;
+    box-sizing: content-box;
   }
   #starfieldint {
-    position: fixed;
+    position: absolute;
     left: 30vw;
     top: 30vh;
     width: 40vw;

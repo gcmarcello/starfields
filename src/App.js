@@ -1,16 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
+import Sliders from './components/Sliders';
 
 // Task: Setar todas as Probs para gerar 4 "raridades" de estrelas
 const myLinks = ["www.mylink.com"];
+
 
 const generateStar = () => {
   const stars = [];
   for (let i = 0; i < 120; i++) {
     // Posição
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-
+    const x = [Math.random() * 100];
+    const y = [Math.random() * 100];
     // RGB aleatório
     const r = Math.random() * (255 - 190) + 190;
     const g = Math.random() * (255 - 190) + 190;
@@ -19,19 +20,19 @@ const generateStar = () => {
     // Velocidade aleatória
     let rndTwinkle;
     let twinkleProb = (Math.random()*2) - 1;
-    if (twinkleProb >= 0.75) {
-      rndTwinkle = Math.random() * (2 - 0.6) + 0.6;
+    if (twinkleProb >= 0.5) {
+      rndTwinkle = Math.random() * (3 - 2) + 2;
     } else {
-      rndTwinkle = Math.random() * (5 - 2) + 2;
+      rndTwinkle = Math.random() * (2 - 1) + 1;
     };
 
     // Tamanho
     let rndSize;
     let sizeProb = (Math.random()*2) - 1;
     if (sizeProb >= 0.99) {
-      rndSize = Math.random() * (3.5 - 2) + 2;
+      rndSize = Math.random() * (5 - 2) + 2;
     } else {
-      rndSize = Math.random() * (2 - 1) + 1;
+      rndSize = Math.random() * (3.5 - 2) + 2;
     };
 
     // Opacidade Inicial
@@ -53,16 +54,7 @@ const generateStar = () => {
     };
 
     // Random Positions for animation
-    const x1 = (Math.random()*2) - 1;
-    const x2 = (Math.random()*2) - 1;
-    const x3 = (Math.random()*2) - 1;
-    const x4 = (Math.random()*2) - 1;
-    const x5 = (Math.random()*2) - 1;
-    const x6 = (Math.random()*2) - 1;
-    const x7 = (Math.random()*2) - 1;
-    const x8 = (Math.random()*2) - 1;
-    const x9 = (Math.random()*2) - 1;
-    const x10 = (Math.random()*2) - 1;
+    const [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10] = [(Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1];
     stars.push({ x, y, r, g, b, rndTwinkle, rndSize, flash, opac, x1,x2,x3,x4,x5,x6,x7,x8,x9,x10 });
   }
   return stars;
@@ -85,7 +77,15 @@ const generateInteractiveStars = () => {
   return intStars;
 };
 
+
+
 const App = () => {
+  const [qtdEstrelas, setQtdEstrelas] = useState(1500);
+
+  const updateQtdEstrelas = (value) => {
+    setQtdEstrelas(value);
+  };
+
   const starContainer = useRef(null);
   const starContainerint = useRef(null);
 
@@ -129,14 +129,14 @@ const App = () => {
 
     let i = 0;
     const interval = setInterval(() => {
-      if (i < 2600) {
+      if (i < qtdEstrelas) {
         const newStar = generateStar()[0];
         addStar(newStar);
         i++;
       } else {
         clearInterval(interval);
       }
-    }, 5);
+    }, 10);
 
     generateInteractiveStars().forEach(intStar => {
       const intStarElement = document.createElement('div');
@@ -164,13 +164,20 @@ const App = () => {
     });
 
     return () => clearInterval(interval);
-  }, []);
+  }, [qtdEstrelas]);
 
   return (
+<div className="App">
+      <Sliders onSliderChange={updateQtdEstrelas} />
+      <div id = "slidersinfo">
+        <p>  const updateQtdEstrelas = ({qtdEstrelas}) = 
+    setQtdEstrelas({qtdEstrelas})</p>
+      </div>
     <div>
       <div id="starfield" ref={starContainer}></div>
       <div id="starfieldint" ref={starContainerint}></div>
     </div>
+  </div>
   );
 };
 
