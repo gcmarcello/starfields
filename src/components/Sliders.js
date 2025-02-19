@@ -14,8 +14,8 @@ export function SlidersQtd({onSliderChange_qtd}) {                   // QUANTIDA
       <input
         type="range"
         min="0"
-        max="3000"
-        defaultValue="1000"
+        max="1500"
+        defaultValue="750"
         ref={refqtdEstrelas}
         onInput={handleChange}
       />
@@ -36,9 +36,9 @@ export function SlidersTmp({onSliderChange_tmp}) {                  // TEMPO DE 
       <input
         type="range"
         min="0"
-        max="10"
+        max="5"
         step="0.5"
-        defaultValue="3"
+        defaultValue="2.5"
         ref={reftmpEstrelas}
         onInput={handleChange}
       />
