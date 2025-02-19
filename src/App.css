@@ -6,8 +6,9 @@
     height: 200vh;
     width: 100vw;
   }
-  #sliders{
-    position: absolute;
+  .sliders{
+    box-sizing: content-box;
+    position: inherit;
     z-index: 1;
   }
   #slidersinfo{

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
-import Sliders from './components/Sliders';
+import {SlidersQtd, SlidersTmp} from './components/Sliders'
 
 // Task: Setar todas as Probs para gerar 4 "raridades" de estrelas
 const myLinks = ["www.mylink.com"];
@@ -19,11 +19,11 @@ const generateStar = () => {
 
     // Velocidade aleatória
     let rndTwinkle;
-    let twinkleProb = (Math.random()*2) - 1;
+    let twinkleProb = (Math.random() * 2) - 1;
     if (twinkleProb >= 0.5) {
-      rndTwinkle = Math.random() * (3 - 2) + 2;
+      rndTwinkle = Math.random() * ((App.tmpEstrelas * 3) - (App.tmpEstrelas * 2)) + (App.tmpEstrelas * 2);
     } else {
-      rndTwinkle = Math.random() * (2 - 1) + 1;
+      rndTwinkle = Math.random() * ((App.tmpEstrelas * 2) - (App.tmpEstrelas * 1)) + (App.tmpEstrelas * 1);
     };
 
     // Tamanho
@@ -81,9 +81,14 @@ const generateInteractiveStars = () => {
 
 const App = () => {
   const [qtdEstrelas, setQtdEstrelas] = useState(1500);
+  const [tmpEstrelas, setTmpEstrelas] = useState(2);
 
   const updateQtdEstrelas = (value) => {
     setQtdEstrelas(value);
+  };
+
+  const updateTmpEstrelas = (tmpvalue) => {
+    setTmpEstrelas(tmpvalue);
   };
 
   const starContainer = useRef(null);
@@ -168,10 +173,13 @@ const App = () => {
 
   return (
 <div className="App">
-      <Sliders onSliderChange={updateQtdEstrelas} />
+      <SlidersQtd onSliderChange_qtd = {updateQtdEstrelas} />
+      <SlidersTmp onSliderChange_tmp = {updateTmpEstrelas} />
       <div id = "slidersinfo">
         <p>  const updateQtdEstrelas = ({qtdEstrelas}) = 
     setQtdEstrelas({qtdEstrelas})</p>
+    <p>  const updateTmpEstrelas = ({tmpEstrelas}) = 
+    setTmpEstrelas({tmpEstrelas})</p>
       </div>
     <div>
       <div id="starfield" ref={starContainer}></div>
