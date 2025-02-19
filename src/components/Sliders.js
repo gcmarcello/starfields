@@ -12,7 +12,7 @@ export function SlidersQtd({onSliderChange_qtd}) {                   // QUANTIDA
       <input
         type="range"
         min="0"
-        max="1600"
+        max="3600"
         step="50"
         defaultValue="800"
         ref={refqtdEstrelas}
