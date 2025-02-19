@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
-import {SlidersQtd, SlidersTmp} from './components/Sliders'
+import {SlidersColor, SlidersQtd, SlidersSize, SlidersTmp} from './components/Sliders'
 
 
 const myLinks = ["www.mylink.com"];                                                                   // Links para Estrelas Interativas
@@ -11,12 +11,20 @@ const App = () => {                                                             
 
   const [qtdEstrelas, setQtdEstrelas] = useState(800);
   const [tmpEstrelas, setTmpEstrelas] = useState(2);
+  const [sizeEstrelas, setSizeEstrelas] = useState(2);
+  const [colorEstrelas, setColorEstrelas] = useState(155);
   
   const updateQtdEstrelas = (value) => {                                                    // Slider QTD
     setQtdEstrelas(value);
   };
   const updateTmpEstrelas = (tmpvalue) => {                                                 // Slider TMP
     setTmpEstrelas(tmpvalue);
+  };
+  const updateSizeEstrelas = (sizevalue) => {                                               // Slider SIZE
+    setSizeEstrelas(sizevalue);
+  };
+  const updateColorEstrelas = (colorvalue) => {                                               // Slider SIZE
+    setColorEstrelas(colorvalue);
   };
 
   const generateInteractiveStars = () => {                                                  // Objeto Estrela Interativa
@@ -44,23 +52,26 @@ const App = () => {                                                             
     function generateStar(){                                            // Objeto Estrela Ordinária
       const x = [Math.random() * 100];                                  // Posição
       const y = [Math.random() * 100];
-      const r = Math.random() * (255 - 140) + 140;                      // Cor
-      const g = Math.random() * (255 - 140) + 140;
-      const b = Math.random() * (255 - 140) + 140;                      // Tempo de Animação
+      let colorVary;
+      const r = (Math.random() * (255 - 150) + 150);                      // Cor
+      const g = (Math.random() * (255 - 150) + 100); 
+      const b = (Math.random() * (255 - 150) + 150);                      // Tempo de Animação
+
       let animTimeProb = (Math.random() * 2) - 1;
       let animTime;
       if(animTimeProb >= 0.9) {
         animTime = (tmpEstrelas * Math.random() * (3 - 2) + 2)
       } else{
-        animTime = (tmpEstrelas * Math.random() * (2 - 1) + 1);
+        animTime = (tmpEstrelas * Math.random() * (2 - 1) + 1)
       };
       let rndSize;                                                      // Tamanho
-      let sizeProb = (Math.random()*2) - 1;
-      if (sizeProb >= 0.99) {
-        rndSize = Math.random() * (5 - 2) + 2;
-      } else {
-        rndSize = Math.random() * (3.5 - 2) + 2;
+      let sizeProb = (Math.random() * 2) - 1;
+      if(sizeProb >= 0.9){
+        rndSize = (sizeEstrelas * Math.random() * (3 - 2) + 2)
+      } else{
+        rndSize = (sizeEstrelas * Math.random() * (2 - 1) + 1)
       };
+
       let opac;                                                         // Opacidade Inicial
       let opacProb = (Math.random()*2) - 1;
       if (opacProb >= 50) {
@@ -144,18 +155,24 @@ const App = () => {                                                             
       starContainerint.current.appendChild(earthElement);
     });
 
-  }, [qtdEstrelas, tmpEstrelas]);                                                                    // Fim useEffect
+  }, [qtdEstrelas, tmpEstrelas, sizeEstrelas]);                                                                    // Fim useEffect
 
 
   return (                                                                               // JSX
 <div className="App">
 
-      <SlidersQtd onSliderChange_qtd = {updateQtdEstrelas} />
-      <SlidersTmp onSliderChange_tmp = {updateTmpEstrelas} />
-
       <div id = "slidersinfo">
-        <p>updateQtdEstrelas = ({qtdEstrelas})</p>
-        <p>animTime = ({tmpEstrelas})</p>
+        <h1>✦ Star Editor ✦</h1>
+        <p>Star Size: {sizeEstrelas}</p>
+        <SlidersSize onSliderChange_size = {updateSizeEstrelas} />
+        <p>Color Variation: {colorEstrelas}</p>
+        <SlidersColor onSliderChange_color = {updateColorEstrelas} />
+        <p>Light Delay: {tmpEstrelas}</p>
+        <SlidersTmp onSliderChange_tmp = {updateTmpEstrelas} />
+        <p>Quantity: {qtdEstrelas}</p>
+        <SlidersQtd onSliderChange_qtd = {updateQtdEstrelas} />
+        
+
       </div>
 
     <div>
