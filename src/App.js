@@ -2,148 +2,125 @@ import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import {SlidersQtd, SlidersTmp} from './components/Sliders'
 
-// Task: Setar todas as Probs para gerar 4 "raridades" de estrelas
-const myLinks = ["www.mylink.com"];
 
+const myLinks = ["www.mylink.com"];                                                                   // Links para Estrelas Interativas
 
-const generateStar = () => {
-  const stars = [];
-  for (let i = 0; i < 120; i++) {
-    // Posição
-    const x = [Math.random() * 100];
-    const y = [Math.random() * 100];
-    // RGB aleatório
-    const r = Math.random() * (255 - 190) + 190;
-    const g = Math.random() * (255 - 190) + 190;
-    const b = Math.random() * (255 - 190) + 190;
-
-    // Velocidade aleatória
-    let rndTwinkle;
-    let twinkleProb = (Math.random() * 2) - 1;
-    if (twinkleProb >= 0.5) {
-      rndTwinkle = Math.random() * ((App.tmpEstrelas * 3) - (App.tmpEstrelas * 2)) + (App.tmpEstrelas * 2);
-    } else {
-      rndTwinkle = Math.random() * ((App.tmpEstrelas * 2) - (App.tmpEstrelas * 1)) + (App.tmpEstrelas * 1);
-    };
-
-    // Tamanho
-    let rndSize;
-    let sizeProb = (Math.random()*2) - 1;
-    if (sizeProb >= 0.99) {
-      rndSize = Math.random() * (5 - 2) + 2;
-    } else {
-      rndSize = Math.random() * (3.5 - 2) + 2;
-    };
-
-    // Opacidade Inicial
-    let opac;
-    let opacProb = (Math.random()*2) - 1;
-    if (opacProb >= 50) {
-      opac = Math.random() * (0.95 - 0.75) + 0.75;
-    } else {
-      opac = 0;
-    };
-
-    // Opacidade Flash
-    let flash;
-    let flashProb = (Math.random()*2) - 1;
-    if (flashProb >= 0.85) {
-      flash = Math.random() * (1 - 0.8) + 0.8;
-    } else {
-      flash = Math.random() * 0.2;
-    };
-
-    // Random Positions for animation
-    const [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10] = [(Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1];
-    stars.push({ x, y, r, g, b, rndTwinkle, rndSize, flash, opac, x1,x2,x3,x4,x5,x6,x7,x8,x9,x10 });
-  }
-  return stars;
-};
-
-const generateInteractiveStars = () => {
-  const intStars = [];
-  for (let i = 0; i < myLinks.length; i++) {
-    const link = myLinks[i];
-    const x1 = (Math.random()*2) - 1;
-    const x2 = (Math.random()*2) - 1;
-    const x5 = (Math.random()*2) - 1;
-    const x6 = (Math.random()*2) - 1;
-    const x9 = (Math.random()*2) - 1;
-    const x10 = (Math.random()*2) - 1;
-    const intStar_x = Math.random() * 100;
-    const intStar_y = Math.random() * 100;
-    intStars.push({ link, intStar_x, intStar_y, x1,x2,x5,x6,x9,x10});
-  }
-  return intStars;
-};
-
-
-
-const App = () => {
-  const [qtdEstrelas, setQtdEstrelas] = useState(1500);
-  const [tmpEstrelas, setTmpEstrelas] = useState(2);
-
-  const updateQtdEstrelas = (value) => {
-    setQtdEstrelas(value);
-  };
-
-  const updateTmpEstrelas = (tmpvalue) => {
-    setTmpEstrelas(tmpvalue);
-  };
-
+const App = () => {                                                                                   // True App.js
   const starContainer = useRef(null);
   const starContainerint = useRef(null);
 
-  useEffect(() => {
-    const addStar = (star) => {
-      const starElement = document.createElement('div');
-      starElement.className = 'star';
-      starElement.style.height = `${star.rndSize}px`;
-      starElement.style.width = `${star.rndSize}px`;
-      starElement.style.left = `${star.x}vw`;
-      starElement.style.top = `${star.y}vh`;
-      starElement.style.animationDuration = `${star.rndTwinkle}s`;
-      starElement.style.background = `rgb(${star.r},${star.g},${star.b})`;
-      starElement.style.setProperty('--flash', star.flash);
-      starElement.style.setProperty('--opac', star.opac);
-      starElement.style.setProperty('--x1', star.x1 + "px");
-      starElement.style.setProperty('--x2', star.x2 + "px");
-      starElement.style.setProperty('--x3', star.x3 + "px");
-      starElement.style.setProperty('--x4', star.x4 + "px");
-      starElement.style.setProperty('--x5', star.x5 + "px");
-      starElement.style.setProperty('--x6', star.x6 + "px");
-      starElement.style.setProperty('--x7', star.x7 + "px");
-      starElement.style.setProperty('--x8', star.x8 + "px");
-      starElement.style.setProperty('--x9', star.x9 + "px");
-      starElement.style.setProperty('--x10', star.x10 + "px");
+  const [qtdEstrelas, setQtdEstrelas] = useState(1000);
+  const [tmpEstrelas, setTmpEstrelas] = useState(3);
+  
+  const updateQtdEstrelas = (value) => {                                                    // Slider QTD
+    setQtdEstrelas(value);
+  };
+  const updateTmpEstrelas = (tmpvalue) => {                                                 // Slider TMP
+    setTmpEstrelas(tmpvalue);
+  };
 
-      if (star.rndSize >= 4) {
+  const generateInteractiveStars = () => {                                                  // Objeto Estrela Interativa
+    const intStars = [];
+    for (let i = 0; i < myLinks.length; i++) {
+      const link = myLinks[i];
+      const x1 = (Math.random()*2) - 1;
+      const x2 = (Math.random()*2) - 1;
+      const x5 = (Math.random()*2) - 1;
+      const x6 = (Math.random()*2) - 1;
+      const x9 = (Math.random()*2) - 1;
+      const x10 = (Math.random()*2) - 1;
+      const intStar_x = Math.random() * 100;
+      const intStar_y = Math.random() * 100;
+      intStars.push({ link, intStar_x, intStar_y, x1,x2,x5,x6,x9,x10});
+    }
+    return intStars;
+  };
+
+  useEffect(() => {                                                                     // useEffect
+    starContainer.current.innerHTML = '';
+    starContainerint.current.innerHTML = '';
+    
+
+    function generateStar(){                                                                  // Objeto Estrela Ordinária
+      const x = [Math.random() * 100];                                  // Posição
+      const y = [Math.random() * 100];
+      const r = Math.random() * (255 - 190) + 190;                      // Cor
+      const g = Math.random() * (255 - 190) + 190;
+      const b = Math.random() * (255 - 190) + 190;
+      let animTime;                                                     // Tempo de Animação
+      let animTimeProb = (Math.random()*2) - 1;
+      if (animTimeProb >=0.5){
+        animTime = tmpEstrelas
+      } else {
+        animTime = (tmpEstrelas) / 2
+      }
+      let rndSize;                                                      // Tamanho
+      let sizeProb = (Math.random()*2) - 1;
+      if (sizeProb >= 0.99) {
+        rndSize = Math.random() * (5 - 2) + 2;
+      } else {
+        rndSize = Math.random() * (3.5 - 2) + 2;
+      };
+      let opac;                                                         // Opacidade Inicial
+      let opacProb = (Math.random()*2) - 1;
+      if (opacProb >= 50) {
+        opac = Math.random() * (0.95 - 0.75) + 0.75;
+      } else {
+        opac = 0;
+      };
+      let flash;                                                        // Opacidade Máxima
+      let flashProb = (Math.random()*2) - 1;
+      if (flashProb >= 0.85) {
+        flash = Math.random() * (1 - 0.8) + 0.8;
+      } else {
+        flash = Math.random() * 0.2;
+      };
+      //                                                                   Posições aleatórias para animação
+      const [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10] = 
+      [(Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1,
+          (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1,
+          (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1,
+          (Math.random()*2) - 1];
+      
+      const Star = { x, y, r, g, b, rndSize, animTime,                  // Passa Props para nova estrela
+         flash, opac, x1,x2,x3,x4,x5,x6,x7,x8,x9,x10 };
+
+      return Star
+    };
+
+    const addStar = (Star) => {                                                             // Renderiza Estrela no DOM
+      const starElement = document.createElement('div');
+      starElement.className = 'Star';
+      starElement.style.height = `${Star.rndSize}px`;
+      starElement.style.width = `${Star.rndSize}px`;
+      starElement.style.left = `${Star.x}vw`;
+      starElement.style.top = `${Star.y}vh`;
+      starElement.style.animationDuration = `${Star.animTime}s`;
+      starElement.style.background = `rgb(${Star.r},${Star.g},${Star.b})`;
+      starElement.style.setProperty('--flash', Star.flash);
+      starElement.style.setProperty('--opac', Star.opac);
+      starElement.style.setProperty('--x1', Star.x1 + "px");
+      starElement.style.setProperty('--x2', Star.x2 + "px");
+      starElement.style.setProperty('--x3', Star.x3 + "px");
+      starElement.style.setProperty('--x4', Star.x4 + "px");
+      starElement.style.setProperty('--x5', Star.x5 + "px");
+      starElement.style.setProperty('--x6', Star.x6 + "px");
+      starElement.style.setProperty('--x7', Star.x7 + "px");
+      starElement.style.setProperty('--x8', Star.x8 + "px");
+      starElement.style.setProperty('--x9', Star.x9 + "px");
+      starElement.style.setProperty('--x10', Star.x10 + "px");
+
+      if (Star.rndSize >= 4) {
         starElement.style.boxShadow = `0px 0px 12px 2px rgba(255, 255, 255, 0.25)`;
       }
 
       starContainer.current.appendChild(starElement);
       starElement.addEventListener("animationend", () => {
         starElement.remove();
-        const newStar = generateStar()[0];
-        addStar(newStar);
+        addStar(generateStar());
       });
     };
-
-    starContainer.current.innerHTML = '';
-    starContainerint.current.innerHTML = '';
-
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < qtdEstrelas) {
-        const newStar = generateStar()[0];
-        addStar(newStar);
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 10);
-
-    generateInteractiveStars().forEach(intStar => {
+    generateInteractiveStars().forEach(intStar => {                                         // Renderiza Estrela Interativa no DOM
       const intStarElement = document.createElement('div');
       const earthElement = document.createElement('div');
       earthElement.className = 'earth';
@@ -168,19 +145,33 @@ const App = () => {
       starContainerint.current.appendChild(earthElement);
     });
 
-    return () => clearInterval(interval);
-  }, [qtdEstrelas]);
 
-  return (
+    let i = 0;                                                                              // Looping Gerador de Novas Estrelas
+    const interval = setInterval(() => {
+      if (i < qtdEstrelas) {
+        addStar(generateStar());
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 0);
+
+    return () => clearInterval(interval);
+
+  }, [qtdEstrelas, tmpEstrelas]);                                                                    // Fim useEffect
+
+
+  return (                                                                               // JSX
 <div className="App">
+
       <SlidersQtd onSliderChange_qtd = {updateQtdEstrelas} />
       <SlidersTmp onSliderChange_tmp = {updateTmpEstrelas} />
+
       <div id = "slidersinfo">
-        <p>  const updateQtdEstrelas = ({qtdEstrelas}) = 
-    setQtdEstrelas({qtdEstrelas})</p>
-    <p>  const updateTmpEstrelas = ({tmpEstrelas}) = 
-    setTmpEstrelas({tmpEstrelas})</p>
+        <p>updateQtdEstrelas = ({qtdEstrelas})</p>
+        <p>animTime = ({tmpEstrelas})</p>
       </div>
+
     <div>
       <div id="starfield" ref={starContainer}></div>
       <div id="starfieldint" ref={starContainerint}></div>

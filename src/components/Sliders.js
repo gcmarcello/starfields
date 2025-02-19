@@ -1,7 +1,7 @@
 
 import React, { useRef } from "react";
 
-export function SlidersQtd({onSliderChange_qtd}) {
+export function SlidersQtd({onSliderChange_qtd}) {                   // QUANTIDADE
   const refqtdEstrelas = useRef(null);
 
   const handleChange = () => {
@@ -10,34 +10,35 @@ export function SlidersQtd({onSliderChange_qtd}) {
   };
 
   return (
-    <div class = "sliders">
+    <div className = "sliders">
       <input
         type="range"
         min="0"
-        max="3500"
-        defaultValue="1500"
+        max="3000"
+        defaultValue="1000"
         ref={refqtdEstrelas}
         onInput={handleChange}
       />
     </div>
   );
 }
-export function SlidersTmp({onSliderChange_tmp}) {
+
+export function SlidersTmp({onSliderChange_tmp}) {                  // TEMPO DE ANIMAÇÃO
   const reftmpEstrelas = useRef(null);
 
   const handleChange = () => {
-    const value = reftmpEstrelas.current.value;
-    onSliderChange_tmp(value);
+    const tmpvalue = reftmpEstrelas.current.value;
+    onSliderChange_tmp(tmpvalue);
   };
 
   return (
-    <div class = "sliders">
+    <div className = "sliders">
       <input
         type="range"
-        min="0.1"
+        min="0"
         max="10"
-        step="0.1"
-        defaultValue="0.5"
+        step="0.5"
+        defaultValue="3"
         ref={reftmpEstrelas}
         onInput={handleChange}
       />
