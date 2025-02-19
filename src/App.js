@@ -9,8 +9,8 @@ const App = () => {                                                             
   const starContainer = useRef(null);
   const starContainerint = useRef(null);
 
-  const [qtdEstrelas, setQtdEstrelas] = useState(1000);
-  const [tmpEstrelas, setTmpEstrelas] = useState(2.5);
+  const [qtdEstrelas, setQtdEstrelas] = useState(800);
+  const [tmpEstrelas, setTmpEstrelas] = useState(2);
   
   const updateQtdEstrelas = (value) => {                                                    // Slider QTD
     setQtdEstrelas(value);
