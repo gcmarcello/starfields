@@ -44,9 +44,9 @@ const App = () => {                                                             
     function generateStar(){                                            // Objeto Estrela Ordinária
       const x = [Math.random() * 100];                                  // Posição
       const y = [Math.random() * 100];
-      const r = Math.random() * (255 - 160) + 160;                      // Cor
-      const g = Math.random() * (255 - 160) + 160;
-      const b = Math.random() * (255 - 160) + 160;                      // Tempo de Animação
+      const r = Math.random() * (255 - 140) + 140;                      // Cor
+      const g = Math.random() * (255 - 140) + 140;
+      const b = Math.random() * (255 - 140) + 140;                      // Tempo de Animação
       let animTimeProb = (Math.random() * 2) - 1;
       let animTime;
       if(animTimeProb >= 0.9) {
@@ -75,14 +75,12 @@ const App = () => {                                                             
       } else {
         flash = Math.random() * 0.2;
       };
-      const [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10] =                 // Posições aleatórias para animação
+      const [x1, x2, x3, x4, x5, x6] =                 // Posições aleatórias para animação
       [(Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1,
-          (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1,
-          (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1,
-          (Math.random()*2) - 1];
+          (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1];
 
       const Star = { x, y, r, g, b, rndSize, animTime,                    // Passa Props para lista
-            flash, opac, x1,x2,x3,x4,x5,x6,x7,x8,x9,x10};
+            flash, opac, x1,x2,x3,x4,x5,x6};
       return Star
     };
 
@@ -103,10 +101,6 @@ const App = () => {                                                             
       starElement.style.setProperty('--x4', Star.x4 + "px");
       starElement.style.setProperty('--x5', Star.x5 + "px");
       starElement.style.setProperty('--x6', Star.x6 + "px");
-      starElement.style.setProperty('--x7', Star.x7 + "px");
-      starElement.style.setProperty('--x8', Star.x8 + "px");
-      starElement.style.setProperty('--x9', Star.x9 + "px");
-      starElement.style.setProperty('--x10', Star.x10 + "px");
       if (Star.rndSize >= 4) {
         starElement.style.boxShadow = `0px 0px 12px 2px rgba(255, 255, 255, 0.25)`;
       }

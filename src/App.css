@@ -65,11 +65,9 @@
     0%{transform: translate(0px, 0px);
       opacity: var(--opac);}
     15%{transform: translate(var(--x1), var(--x2))}
-    30%{transform: translate(var(--x3), var(--x4))}
     50% {opacity: var(--flash);
-      transform: translate(var(--x5), var(--x6))}
-    65%{transform: translate(var(--x7), var(--x8))}
-    85%{transform: translate(var(--x9), var(--x10))}
+      transform: translate(var(--x3), var(--x4))}
+    85%{transform: translate(var(--x5), var(--x6));}
     100%{
         transform: translate(0px, 0px);
         opacity: var(--opac);}}
