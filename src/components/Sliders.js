@@ -12,9 +12,9 @@ export function SlidersQtd({onSliderChange_qtd}) {                   // QUANTIDA
       <input
         type="range"
         min="0"
-        max="3600"
-        step="50"
-        defaultValue="800"
+        max="2000"
+        step="100"
+        defaultValue="700"
         ref={refqtdEstrelas}
         onInput={handleChange}
       />
@@ -33,7 +33,7 @@ export function SlidersTmp({onSliderChange_tmp}) {                  // TEMPO DE 
       <input
         type="range"
         min="0.5"
-        max="5"
+        max="8"
         step="0.5"
         defaultValue="2"
         ref={reftmpEstrelas}
@@ -56,7 +56,7 @@ export function SlidersSize({onSliderChange_size}) {                  // TAMANHO
         min="0.5"
         max="10"
         step="0.5"
-        defaultValue="2"
+        defaultValue="1"
         ref={refsizeEstrelas}
         onInput={handleChange}
       />
@@ -76,9 +76,9 @@ export function SlidersColor({onSliderChange_color}) {                  // COR
       <input
         type="range"
         min="1"
-        max="255"
-        step="2"
-        defaultValue="155"
+        max="10"
+        step="0.5"
+        defaultValue="1"
         ref={refcolorEstrelas}
         onInput={handleChange}
       />

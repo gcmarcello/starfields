@@ -9,10 +9,10 @@ const App = () => {                                                             
   const starContainer = useRef(null);
   const starContainerint = useRef(null);
 
-  const [qtdEstrelas, setQtdEstrelas] = useState(800);
+  const [qtdEstrelas, setQtdEstrelas] = useState(700);
   const [tmpEstrelas, setTmpEstrelas] = useState(2);
-  const [sizeEstrelas, setSizeEstrelas] = useState(2);
-  const [colorEstrelas, setColorEstrelas] = useState(155);
+  const [sizeEstrelas, setSizeEstrelas] = useState(1);
+  const [colorEstrelas, setColorEstrelas] = useState(1);
   
   const updateQtdEstrelas = (value) => {                                                    // Slider QTD
     setQtdEstrelas(value);
@@ -50,47 +50,58 @@ const App = () => {                                                             
     
 
     function generateStar(){                                            // Objeto Estrela Ordinária
-      const x = [Math.random() * 100];                                  // Posição
-      const y = [Math.random() * 100];
-      let colorVary;
-      const r = (Math.random() * (255 - 150) + 150);                      // Cor
-      const g = (Math.random() * (255 - 150) + 100); 
-      const b = (Math.random() * (255 - 150) + 150);                      // Tempo de Animação
+      const x = [(Math.random() * 100).toFixed(2)];                                  // Posição
+      const y = [(Math.random() * 100).toFixed(2)];
+
+
+      let h;                                                              // Hue, Saturation, Lighting **WIP**
+      let hCond = Math.round(Math.random() * 355);
+      if (colorEstrelas != 10)
+        {
+        if (hCond > 75 && hCond < 210){
+          h = Math.round(Math.random() * 75)}
+        else{
+          h = hCond}
+        }
+      else{h = hCond};
+
+      let s = Math.round(Math.random() * (colorEstrelas * 10));
+      let l = Math.round((Math.random() * 100 - 90) + 90); 
 
       let animTimeProb = (Math.random() * 2) - 1;
       let animTime;
       if(animTimeProb >= 0.9) {
-        animTime = (tmpEstrelas * Math.random() * (3 - 2) + 2)
+        animTime = +(tmpEstrelas * Math.random() * (4 - 3) + 3).toFixed(1)
       } else{
-        animTime = (tmpEstrelas * Math.random() * (2 - 1) + 1)
+        animTime = +(tmpEstrelas * Math.random() * (2 - 1) + 1).toFixed(1)
       };
       let rndSize;                                                      // Tamanho
-      let sizeProb = (Math.random() * 2) - 1;
-      if(sizeProb >= 0.9){
-        rndSize = (sizeEstrelas * Math.random() * (3 - 2) + 2)
+      let sizeProb = +((Math.random() * 2) - 1).toFixed(1);
+      if(sizeProb >= 0.5){
+        rndSize = +(sizeEstrelas * Math.random() * (3 - 2) + 2).toFixed(1)
       } else{
-        rndSize = (sizeEstrelas * Math.random() * (2 - 1) + 1)
+        rndSize = +(sizeEstrelas * Math.random() * (2 - 1) + 1).toFixed(1)
       };
 
       let opac;                                                         // Opacidade Inicial
-      let opacProb = (Math.random()*2) - 1;
-      if (opacProb >= 50) {
-        opac = Math.random() * (0.95 - 0.75) + 0.75;
-      } else {
-        opac = 0;
-      };
+      opac = 0;
+
       let flash;                                                        // Opacidade Máxima
       let flashProb = (Math.random()*2) - 1;
-      if (flashProb >= 0.85) {
-        flash = Math.random() * (1 - 0.8) + 0.8;
+      if (flashProb >= 0.8) {
+        flash = +(Math.random() * (1 - 0.7) + 0.7).toFixed(1);
       } else {
-        flash = Math.random() * 0.2;
+        flash = +((Math.random() * 0.4 - 0.15) + 0.15).toFixed(1);
       };
-      const [x1, x2, x3, x4, x5, x6] =                 // Posições aleatórias para animação
-      [(Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1,
-          (Math.random()*2) - 1, (Math.random()*2) - 1, (Math.random()*2) - 1];
 
-      const Star = { x, y, r, g, b, rndSize, animTime,                    // Passa Props para lista
+      function animPos(){
+        let rand = +((Math.random()*2) - 1).toFixed(1);
+        return (rand.toString())
+      }
+      const [x1, x2, x3, x4, x5, x6] =                 // Posições aleatórias para animação
+      [animPos(), animPos(), animPos(), animPos(), animPos(), animPos()];
+
+      const Star = { x, y, h, s, l, rndSize, animTime,                    // Passa Props para lista
             flash, opac, x1,x2,x3,x4,x5,x6};
       return Star
     };
@@ -103,7 +114,7 @@ const App = () => {                                                             
       starElement.style.left = `${Star.x}vw`;
       starElement.style.top = `${Star.y}vh`;
       starElement.style.animationDuration = `${Star.animTime}s`;
-      starElement.style.background = `rgb(${Star.r},${Star.g},${Star.b})`;
+      starElement.style.backgroundColor = `hsl(${Star.h},${Star.s}%,${Star.l}%)`;
       starElement.style.setProperty('--flash', Star.flash);
       starElement.style.setProperty('--opac', Star.opac);
       starElement.style.setProperty('--x1', Star.x1 + "px");
@@ -112,9 +123,9 @@ const App = () => {                                                             
       starElement.style.setProperty('--x4', Star.x4 + "px");
       starElement.style.setProperty('--x5', Star.x5 + "px");
       starElement.style.setProperty('--x6', Star.x6 + "px");
-      if (Star.rndSize >= 4) {
-        starElement.style.boxShadow = `0px 0px 12px 2px rgba(255, 255, 255, 0.25)`;
-      }
+      if (`${Star.l}` >= 40){
+        starElement.style.boxShadow = `0px 0px 6px 0.5px hsl(${Star.h},${Star.s}%, 50%)`;
+      };
 
       starContainer.current.appendChild(starElement);
       starElement.addEventListener("animationend", () => {
@@ -155,7 +166,7 @@ const App = () => {                                                             
       starContainerint.current.appendChild(earthElement);
     });
 
-  }, [qtdEstrelas, tmpEstrelas, sizeEstrelas]);                                                                    // Fim useEffect
+  }, [qtdEstrelas, tmpEstrelas, sizeEstrelas, colorEstrelas]);                                                                    // Fim useEffect
 
 
   return (                                                                               // JSX
