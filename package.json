@@ -1,6 +1,6 @@
 {
-  "name": "orangeapp",
-  "version": "0.1.0",
+  "name": "starfields",
+  "version": "0.7",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
