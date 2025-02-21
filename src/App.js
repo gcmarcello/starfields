@@ -9,10 +9,10 @@ const App = () => {                                                             
   const starContainer = useRef(null);
   const starContainerint = useRef(null);
 
-  const [qtdEstrelas, setQtdEstrelas] = useState(700);
-  const [tmpEstrelas, setTmpEstrelas] = useState(2);
-  const [sizeEstrelas, setSizeEstrelas] = useState(1);
-  const [colorEstrelas, setColorEstrelas] = useState(1);
+  const [qtdEstrelas, setQtdEstrelas] = useState(800);
+  const [tmpEstrelas, setTmpEstrelas] = useState(1);
+  const [sizeEstrelas, setSizeEstrelas] = useState(2);
+  const [colorEstrelas, setColorEstrelas] = useState(5);
   
   const updateQtdEstrelas = (value) => {                                                    // Slider QTD
     setQtdEstrelas(value);
@@ -56,17 +56,22 @@ const App = () => {                                                             
 
       let h;                                                              // Hue, Saturation, Lighting **WIP**
       let hCond = Math.round(Math.random() * 355);
-      if (colorEstrelas != 10)
-        {
-        if (hCond > 75 && hCond < 210){
-          h = Math.round(Math.random() * 75)}
-        else{
-          h = hCond}
-        }
+      if (colorEstrelas != 10){
+       if ((hCond >= 75 && hCond <= 210) || (hCond >= 225 && hCond <= 240)){
+         h = Math.round(Math.random() * 75)}
+       else{
+         h = hCond}
+       }
       else{h = hCond};
 
       let s = Math.round(Math.random() * (colorEstrelas * 10));
-      let l = Math.round((Math.random() * 100 - 90) + 90); 
+
+      let l;
+      let lCond = +((Math.random() * 2) - 1).toFixed(1);
+      if(lCond >= 0.9){
+        l = 100
+      } else{
+        l = Math.round((Math.random() * 90 - 50) + 50)};
 
       let animTimeProb = (Math.random() * 2) - 1;
       let animTime;
@@ -88,7 +93,7 @@ const App = () => {                                                             
 
       let flash;                                                        // Opacidade Máxima
       let flashProb = (Math.random()*2) - 1;
-      if (flashProb >= 0.8) {
+      if (flashProb >= 0.5) {
         flash = +(Math.random() * (1 - 0.7) + 0.7).toFixed(1);
       } else {
         flash = +((Math.random() * 0.4 - 0.15) + 0.15).toFixed(1);
@@ -123,9 +128,6 @@ const App = () => {                                                             
       starElement.style.setProperty('--x4', Star.x4 + "px");
       starElement.style.setProperty('--x5', Star.x5 + "px");
       starElement.style.setProperty('--x6', Star.x6 + "px");
-      if (`${Star.l}` >= 40){
-        starElement.style.boxShadow = `0px 0px 6px 0.5px hsl(${Star.h},${Star.s}%, 50%)`;
-      };
 
       starContainer.current.appendChild(starElement);
       starElement.addEventListener("animationend", () => {

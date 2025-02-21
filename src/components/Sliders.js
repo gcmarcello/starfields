@@ -14,7 +14,7 @@ export function SlidersQtd({onSliderChange_qtd}) {                   // QUANTIDA
         min="0"
         max="2000"
         step="100"
-        defaultValue="700"
+        defaultValue="800"
         ref={refqtdEstrelas}
         onInput={handleChange}
       />
@@ -35,7 +35,7 @@ export function SlidersTmp({onSliderChange_tmp}) {                  // TEMPO DE 
         min="0.5"
         max="8"
         step="0.5"
-        defaultValue="2"
+        defaultValue="1"
         ref={reftmpEstrelas}
         onInput={handleChange}
       />
@@ -56,7 +56,7 @@ export function SlidersSize({onSliderChange_size}) {                  // TAMANHO
         min="0.5"
         max="10"
         step="0.5"
-        defaultValue="1"
+        defaultValue="2"
         ref={refsizeEstrelas}
         onInput={handleChange}
       />
@@ -78,7 +78,7 @@ export function SlidersColor({onSliderChange_color}) {                  // COR
         min="1"
         max="10"
         step="0.5"
-        defaultValue="1"
+        defaultValue="5"
         ref={refcolorEstrelas}
         onInput={handleChange}
       />
