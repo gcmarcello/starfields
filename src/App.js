@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
-import {SlidersColor, SlidersQtd, SlidersSize, SlidersTmp} from './components/Sliders'
+import {SlidersColor, SlidersQtd, SlidersSize, SlidersTmp, makeElementDraggable} from './components/Sliders'
 
 
 const myLinks = ["www.mylink.com"];                                                                   // Links para Estrelas Interativas
@@ -47,7 +47,7 @@ const App = () => {                                                             
   useEffect(() => {                                                                         // useEffect
     starContainer.current.innerHTML = '';
     starContainerint.current.innerHTML = '';
-    
+    makeElementDraggable('SLIDERS_HEADER', 'slidersinfo');
 
     function generateStar(){                                            // Objeto Estrela Ordinária
       const x = [(Math.random() * 100).toFixed(2)];                                  // Posição
@@ -174,8 +174,10 @@ const App = () => {                                                             
   return (                                                                               // JSX
 <div className="App">
 
-      <div id = "slidersinfo">
-        <h1>✦ Star Editor ✦</h1>
+    <div id = "slidersinfo">
+      <div id = "SLIDERS_HEADER">✦ Star Editor ✦
+      </div>
+      <div>
         <p>Star Size: {sizeEstrelas}</p>
         <SlidersSize onSliderChange_size = {updateSizeEstrelas} />
         <p>Color Variation: {colorEstrelas}</p>
@@ -184,9 +186,8 @@ const App = () => {                                                             
         <SlidersTmp onSliderChange_tmp = {updateTmpEstrelas} />
         <p>Quantity: {qtdEstrelas}</p>
         <SlidersQtd onSliderChange_qtd = {updateQtdEstrelas} />
-        
-
       </div>
+    </div>
 
     <div>
       <div id="starfield" ref={starContainer}></div>

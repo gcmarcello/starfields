@@ -1,4 +1,4 @@
-  body {
+body {
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -7,7 +7,7 @@
     width: 100vw;
   }
   p { margin: 8px; user-select: none}
-  h1 {
+  #SLIDERS_HEADER {
     padding-top: 9px;
     font-size: large; font-weight: 520; letter-spacing: 4px;
   color: rgba(199, 197, 74);
@@ -18,7 +18,9 @@
   border-bottom: solid  rgba(199, 197, 74, 0.33) 1px;
   user-select: none;
   font-style: normal;
-  font-weight: 530;}
+  font-weight: 530;
+  cursor: move;
+}
 
   .sliders{
     scroll-padding-inline-start: 50px;
@@ -43,7 +45,6 @@
     letter-spacing: 0.7px;
     word-spacing: 2px;
     border-radius: 18px;
-
   }
   #starfield {
     position: absolute;
