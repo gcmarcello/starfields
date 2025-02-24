@@ -8,7 +8,7 @@ body {
   }
   p { margin: 8px; user-select: none}
   #SLIDERS_HEADER {
-    padding-top: 9px;
+    padding-top: 22px;
     font-size: large; font-weight: 520; letter-spacing: 4px;
   color: rgba(199, 197, 74);
   border-radius: 8px;
@@ -34,7 +34,7 @@ body {
     position: absolute;
     width: 240px;
     height: 336px;
-    background-color: rgba(99, 142, 204, 0.055);
+    background-color: rgba(190, 217, 255, 0.1);
     border: solid rgba(199, 197, 74, 0.22) 1px;
     color: rgba(255, 255, 255);
     z-index: 1;
