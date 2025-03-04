@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, forwardRef  } from "react";
 
-export function RangeInput({ ref, onChange, min, max, step, defaultValue }) {
+export const RangeInput = forwardRef(({ onChange, min, max, step, defaultValue }, ref) => {
   return (
     <div className="sliders">
       <input
@@ -11,9 +11,10 @@ export function RangeInput({ ref, onChange, min, max, step, defaultValue }) {
         defaultValue={defaultValue}
         ref={ref}
         onInput={onChange}
-      /></div>
+      />
+    </div>
   );
-}
+});
 
 export function SlidersQtd({ onSliderChange_qtd }) {                   // QUANTIDADE
   const refqtdEstrelas = useRef(null);
